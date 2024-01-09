@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador de Energia Solar</title>
+  <style>
+    /* Estilos CSS podem ser adicionados aqui conforme necessário */
+  </style>
+</head>
+<body>
+  <h1>Simulador de Energia Solar</h1>
+
+  <form id="solarCalculator">
+    <label for="horasDeLuzSolar">Horas de Luz Solar por Dia:</label>
+    <input type="number" id="horasDeLuzSolar" name="horasDeLuzSolar" required><br><br>
+
+    <label for="potenciaDoPainel">Potência do Painel Solar (em watts):</label>
+    <input type="number" id="potenciaDoPainel" name="potenciaDoPainel" required><br><br>
+
+    <label for="eficienciaDoPainel">Eficiência do Painel Solar (em decimal):</label>
+    <input type="number" id="eficienciaDoPainel" name="eficienciaDoPainel" step="0.01" min="0" max="1" required><br><br>
+
+    <label for="quantidadeDias">Quantidade de Dias:</label>
+    <input type="number" id="quantidadeDias" name="quantidadeDias" required><br><br>
+
+    <button type="button" onclick="calcularEnergia()">Calcular Energia Gerada</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    function calcularEnergia() {
+      const horasDeLuzSolar = parseFloat(document.getElementById('horasDeLuzSolar').value);
+      const potenciaDoPainel = parseFloat(document.getElementById('potenciaDoPainel').value);
+      const eficienciaDoPainel = parseFloat(document.getElementById('eficienciaDoPainel').value);
+      const quantidadeDias = parseInt(document.getElementById('quantidadeDias').value);
+
+      const energiaDiaria = horasDeLuzSolar * potenciaDoPainel * eficienciaDoPainel / 1000; // em kWh
+      const energiaTotal = energiaDiaria * quantidadeDias;
+
+      document.getElementById('resultado').innerHTML = `Durante ${quantidadeDias} dias, o painel solar de ${potenciaDoPainel} watts gerará aproximadamente ${energiaTotal.toFixed(2)} kWh de energia.`;
+    }
+  </script>
+</body>
+</html>
